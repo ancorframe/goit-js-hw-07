@@ -1,4 +1,4 @@
-import { galleryItems } from './gallery-items.js';
+import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
 console.log(galleryItems);
@@ -19,7 +19,5 @@ new SimpleLightbox(".gallery a", {
   /* options */
   captionsData: "alt",
   captionPosition: "bottom",
-  captionDelay:250,
+  captionDelay: 250,
 });
-
-

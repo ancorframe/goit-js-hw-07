@@ -23,15 +23,12 @@ const galleryItemsRender = galleryItems
 // console.log(galleryItemsRender);
 galleryEl.innerHTML = galleryItemsRender;
 
-
 const linkprev = galleryEl.querySelectorAll(".gallery__link");
 linkprev.forEach((link) =>
   link.addEventListener("click", (e) => {
     e.preventDefault();
   })
 );
-
-
 
 galleryEl.addEventListener("click", onImageClick);
 
@@ -46,7 +43,7 @@ function lightBoxOn(e) {
   const instance = basicLightbox.create(`
     <img src=${e} width="800" height="600">
 `);
-    
+
   instance.show();
 
   if (instance.visible()) {
@@ -55,14 +52,8 @@ function lightBoxOn(e) {
 
   function closeModal(e) {
     if (e.code === "Escape") {
-        instance.close();
-        window.removeEventListener("keydown", closeModal);
+      instance.close();
+      window.removeEventListener("keydown", closeModal);
     }
   }
 }
-
-
-
-
-
-
