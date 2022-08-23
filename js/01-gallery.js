@@ -23,37 +23,35 @@ const galleryItemsRender = galleryItems
 // console.log(galleryItemsRender);
 galleryEl.innerHTML = galleryItemsRender;
 
-const linkprev = galleryEl.querySelectorAll(".gallery__link");
-linkprev.forEach((link) =>
-  link.addEventListener("click", (e) => {
-    e.preventDefault();
-  })
-);
-
 galleryEl.addEventListener("click", onImageClick);
 
 function onImageClick(event) {
+  event.preventDefault();
   if (event.target.nodeName !== "IMG") {
     return;
   }
-  lightBoxOn(event.target.dataset.source);
+
+  instance.element().querySelector("img").src = event.target.dataset.source;
+  instance.show();
 }
 
-function lightBoxOn(e) {
-  const instance = basicLightbox.create(`
-    <img src=${e} width="800" height="600">
-`);
-
-  instance.show();
-
-  if (instance.visible()) {
-    window.addEventListener("keydown", closeModal);
+const instance = basicLightbox.create(
+  `
+    <img src='' width="800" height="600">
+`,
+  {
+    onShow: () => {
+      window.addEventListener("keydown", onCloselightBox);
+    },
+    onClose: () => {
+      window.removeEventListener("keydown", onCloselightBox);
+    },
   }
+);
 
-  function closeModal(e) {
-    if (e.code === "Escape") {
-      instance.close();
-      window.removeEventListener("keydown", closeModal);
-    }
+function onCloselightBox(e) {
+  if (e.code === "Escape") {
+    instance.close();
+    return;
   }
 }
